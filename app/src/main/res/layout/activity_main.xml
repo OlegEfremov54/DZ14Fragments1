@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/fon"
+
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -17,48 +16,15 @@
         app:titleTextColor="@color/black"
         tools:ignore="MissingConstraints" />
 
-    <LinearLayout
-        android:id="@+id/LL1"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/festfragment"
         android:layout_width="match_parent"
-        android:layout_height="653dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/generateCountTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/count_note"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/textNoteET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:hint="@string/text_note" />
-
-        <Button
-            android:id="@+id/addBTN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="@string/add" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewRV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            tools:listitem="@layout/item_list" />
+        android:layout_height="match_parent"
+        android:name="com.example.dz14fragments1.FragmentFest"
+        />
 
 
-    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

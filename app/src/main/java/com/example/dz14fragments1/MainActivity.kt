@@ -1,5 +1,6 @@
 package com.example.dz14fragments1
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -28,60 +29,24 @@ class MainActivity : AppCompatActivity() {
     private var count: Int = 1
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.festfragment, FragmentFest())
+                .commit()
+
         }
+
         //Тулбар
         toolbarMain = findViewById(R.id.toolbarMain)
         setSupportActionBar(toolbarMain)
         title = "  Мои заметки"
         toolbarMain.subtitle = " Версия 1.Главная страница"
         toolbarMain.setLogo(R.drawable.adresbook2smoll)
-
-        //Привязываем кнопку Добавить
-        addBTN = findViewById(R.id.addBTN)
-
-        //Привязываем поля вывода инфы
-        recyclerViewRV = findViewById(R.id.recyclerViewRV)
-        generateCountTV = findViewById(R.id.generateCountTV)
-        textNoteET = findViewById(R.id.textNoteET)
-
-        //Присваеваем номер сообщению
-        generateCountTV.text = "№ $count"
-        //Запускаем менеджер
-        recyclerViewRV.layoutManager = LinearLayoutManager(this)
-        val adapter = MyAdapter(textMess)
-        recyclerViewRV.adapter = adapter
-
-        //Определяем что размеры фиксированные
-        recyclerViewRV.setHasFixedSize(true)
-
-        //Кнопка Добавить
-        addBTN.setOnClickListener {
-            if (textNoteET.text.isEmpty()) {
-                return@setOnClickListener
-            }
-            val text = textNoteET.text.toString()
-            val date = Date().toString()
-            val checkBoxStart = false
-            val note = TextMes(count, text, date, checkBoxStart)
-            textMess.add(note)
-            adapter.notifyDataSetChanged()
-            count = ((textMess[textMess.size - 1].count) + 1)
-            generateCountTV.text = "№ $count"
-            textNoteET.text.clear()
-
-        }
-
-
-
-
 
     }
     //Инициализация Меню
