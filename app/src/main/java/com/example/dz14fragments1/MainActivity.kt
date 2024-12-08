@@ -3,15 +3,29 @@ package com.example.dz14fragments1
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
     private lateinit var toolbarMain:Toolbar
+    private lateinit var addBTN:Button
+
+    private lateinit var recyclerViewRV: RecyclerView
+    private lateinit var generateCountTV: TextView
+    private lateinit var textNoteET: EditText
+
+    private val textMess: MutableList<TextMes> = mutableListOf()
+    private var count: Int = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +43,35 @@ class MainActivity : AppCompatActivity() {
         title = "  Мои заметки"
         toolbarMain.subtitle = " Версия 1.Главная страница"
         toolbarMain.setLogo(R.drawable.adresbook2smoll)
+
+        addBTN = findViewById(R.id.addBTN)
+
+        recyclerViewRV = findViewById(R.id.recyclerViewRV)
+        generateCountTV = findViewById(R.id.generateCountTV)
+        textNoteET = findViewById(R.id.textNoteET)
+
+        generateCountTV.text = "№ $count"
+        recyclerViewRV.layoutManager = LinearLayoutManager(this)
+        val adapter = MyAdapter(textMess)
+        recyclerViewRV.adapter = adapter
+        recyclerViewRV.setHasFixedSize(true)
+
+        addBTN.setOnClickListener {
+            if (textNoteET.text.isEmpty()) {
+                return@setOnClickListener
+            }
+            val text = textNoteET.text.toString()
+            val date = Date().toString()
+            val checkBoxStart = false
+            val note = TextMes(count, text, date, checkBoxStart)
+            textMess.add(note)
+            adapter.notifyDataSetChanged()
+            count = ((textMess[textMess.size - 1].count) + 1)
+            generateCountTV.text = "№ $count"
+            textNoteET.text.clear()
+
+        }
+
 
 
 
