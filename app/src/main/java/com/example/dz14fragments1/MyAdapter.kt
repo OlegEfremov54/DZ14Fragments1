@@ -26,10 +26,10 @@ class MyAdapter (val textMess: MutableList<TextMes>) :
     override fun getItemCount() = textMess.size
 
     override fun onBindViewHolder(holder: TextViewHolder, position: Int) {
-        val note = textMess[position]
-        holder.countTV.text = note.count.toString()
-        holder.textTV.text = note.text
-        holder.dateTV.text = note.date
-        holder.checkBoxStartCB.isChecked = note.checkBoxStart
+        val textMes = textMess[position]
+        holder.countTV.text = textMes.count.toString()
+        holder.textTV.text = textMes.text
+        holder.dateTV.text = textMes.date
+        holder.checkBoxStartCB.isChecked = textMes.checkBoxStart
     }
 }

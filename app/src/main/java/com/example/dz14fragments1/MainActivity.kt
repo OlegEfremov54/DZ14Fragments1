@@ -44,18 +44,25 @@ class MainActivity : AppCompatActivity() {
         toolbarMain.subtitle = " Версия 1.Главная страница"
         toolbarMain.setLogo(R.drawable.adresbook2smoll)
 
+        //Привязываем кнопку Добавить
         addBTN = findViewById(R.id.addBTN)
 
+        //Привязываем поля вывода инфы
         recyclerViewRV = findViewById(R.id.recyclerViewRV)
         generateCountTV = findViewById(R.id.generateCountTV)
         textNoteET = findViewById(R.id.textNoteET)
 
+        //Присваеваем номер сообщению
         generateCountTV.text = "№ $count"
+        //Запускаем менеджер
         recyclerViewRV.layoutManager = LinearLayoutManager(this)
         val adapter = MyAdapter(textMess)
         recyclerViewRV.adapter = adapter
+
+        //Определяем что размеры фиксированные
         recyclerViewRV.setHasFixedSize(true)
 
+        //Кнопка Добавить
         addBTN.setOnClickListener {
             if (textNoteET.text.isEmpty()) {
                 return@setOnClickListener
